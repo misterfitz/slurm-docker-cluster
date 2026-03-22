@@ -60,7 +60,7 @@ services:
       retries: 3
 
   slurm-exporter:
-    image: ghcr.io/giovtorres/slurm-docker-cluster:${SLURM_VERSION:-25.05.3}
+    image: slurm-docker-cluster:${SLURM_VERSION:-25.05.3}
     container_name: slurm-exporter
     command: ["python3", "/opt/slurm-exporter/exporter.py"]
     volumes:

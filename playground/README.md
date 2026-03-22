@@ -51,13 +51,58 @@ playground experiment run burst_workload
 playground experiment results burst_workload
 ```
 
+## Priority Dashboard & Simulation
+
+Visualize Slurm's multifactor priority system with a real-time TUI and a large-scale simulation that creates ~50 users, ~15 accounts, and ~30,000 jobs.
+
+```bash
+# Set up the simulation
+playground simulate setup
+
+# Watch the live priority dashboard
+playground priority live
+
+# Highlight a specific user
+playground priority live -u user01
+
+# Explain a single job's priority calculation
+playground priority explain <JOB_ID>
+
+# Show fairshare for all accounts/users
+playground priority fairshare
+
+# Clean up
+playground simulate teardown
+
+# Compact one-liner for a tmux pane
+playground priority watch -u user01
+
+# tmux status bar integration (add to ~/.tmux.conf)
+# set -g status-right '#(/path/to/playground/tmux/slurm-status.sh -u user01)'
+```
+
+Full documentation: [docs/priority-simulation.md](docs/priority-simulation.md)
+tmux & Vim setup: [tmux/README.md](tmux/README.md)
+
 ## Directory Structure
 
 ```
 playground/
 ├── cli/                    # Python CLI tool
 │   ├── slurm_playground/   # Main package
+│   │   ├── priority.py     # Priority TUI dashboard
+│   │   └── simulate.py     # Large-scale simulation
 │   └── pyproject.toml      # Package configuration
+│
+├── docs/                   # Feature documentation
+│   └── priority-simulation.md
+│
+├── tmux/                   # tmux status bar integration
+│   ├── slurm-status.sh     # Cached status wrapper
+│   └── README.md           # Setup instructions
+│
+├── vim/                    # Vim/Neovim statusline
+│   └── slurm.vim           # Statusline function
 │
 ├── jobs/                   # Bash job templates
 │   ├── cpu_stress.sh       # CPU-bound workload

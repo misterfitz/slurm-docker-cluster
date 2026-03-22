@@ -11,7 +11,9 @@ from rich.table import Table
 from . import __version__
 from .experiment import experiment
 from .metrics import metrics
+from .priority import priority
 from .scale import scale
+from .simulate import simulate
 from .workload import workload
 
 console = Console()
@@ -300,6 +302,8 @@ def partitions(ctx):
 cli.add_command(workload)
 cli.add_command(scale)
 cli.add_command(metrics)
+cli.add_command(priority)
+cli.add_command(simulate)
 cli.add_command(experiment)
 
 
